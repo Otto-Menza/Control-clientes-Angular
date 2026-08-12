@@ -15,28 +15,53 @@
 <section id="clientes">
     <div class="container">
         <div class="row">
-            <div class="card">
-                <div class="card-header">
-                    <h4>Listado de Clientes</h4>
-                </div>
-                <table class="table table-striped">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Saldo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Iterar sobre la lista de clientes -->
-                         @for(cliente of clientes; track cliente){
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Listado de Clientes</h4>
+                    </div>
+                    <table class="table table-striped">
+                        <thead class="table-dark">
                             <tr>
-                                <td>{{cliente.nombre}} {{cliente.apellido}}</td>
-                                <th>{{cliente.saldo | currency: 'COP':'$'}}</th>
+                                <th>Nombre</th>
+                                <th>Saldo</th>
+                                <th></th>
                             </tr>
-                         }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <!-- Iterar sobre la lista de clientes -->
+                            @for(cliente of clientes; track cliente){
+                                <tr>
+                                    <td>{{cliente.nombre}} {{cliente.apellido}}</td>
+                                    <td>{{cliente.saldo | currency: 'COP':'$'}}</td>
+                                    <td>
+                                        <a routerLink="/cliente/editar/{{cliente.id}}" class="btn btn-secondary">
+                                            <i class="bi bi-pencil-square"></i> Editar
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
+            <!-- Tarjetas laterales -->
+             <div class="col-md-3">
+                <!-- Primera tarjets -->
+                <div class="card text-center bg-danger mb-3">
+                    <div class="card-body">
+                        <h3>Saldo Total</h3>
+                        <h3 class="display-4">{{getSaldoTotal() | currency: 'COP':'$'}}</h3>
+                    </div>
+                </div>
+                <!-- Segunda tarjets -->
+                 <div class="card text-center bg-success mb-3">
+                    <div class="card-body">
+                        <h3>Total Clientes</h3>
+                        <h3 class="display-4"><i class="bi bi-people-fill"></i> {{clientes?.length}}</h3>
+                    </div>
+                </div>
+             </div>
         </div>
     </div>
 </section>
