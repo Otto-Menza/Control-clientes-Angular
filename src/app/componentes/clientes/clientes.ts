@@ -1,9 +1,10 @@
-import { Component, NgModule } from '@angular/core';
+import { Component, ElementRef, NgModule, viewChild } from '@angular/core';
 import { Cliente } from '../../modelo/cliente.modelo';
 import { ClienteService } from '../../servicios/cliente';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from "@angular/router";
 import { FormsModule, NgForm } from "@angular/forms";
+import { ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-clientes',
@@ -19,6 +20,7 @@ export class Clientes {
     email:'',
     saldo: undefined
   };
+  @ViewChild('botonCerrar') botonCerrar!: ElementRef;
 
   constructor(private clientesServicio: ClienteService){}
 
@@ -36,8 +38,13 @@ export class Clientes {
     const {value, valid} = clienteForm;
     if(valid){
       //agregar el cliente en la base:
+      this.clientesServicio.agregarCliente(value);
       //limpiar los campos:
       clienteForm.resetForm();
+      this.cerrarModal();
     }
+  }
+  private cerrarModal(){
+    this.botonCerrar.nativeElement.click();
   }
 }
