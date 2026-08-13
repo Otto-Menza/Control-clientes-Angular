@@ -1,1 +1,72 @@
-<p>editar-cliente works!</p>
+<header class="py-2 bg-info test-white" id="main-header">
+    <div class="container">
+        <h1><i class="bi bi-person"></i> Editar cliente</h1>
+    </div>
+</header>
+<form #clienteForm="ngForm" (ngSubmit)="guardar(clienteForm)">
+    <!-- Bottones -->
+     <section id="actions" class="py-4 mb-4">
+        <div class="container d-flex justify-content-between">
+            <a [routerLink]="['/']" class="btn btn-primary">
+                <i class="bi bi-arrow-left"></i> Regresar al Inicio
+            </a>
+            <button class="btn btn-success" type="submit">
+                <i class="bi bi-check"></i> Guardar Cliente
+            </button>
+            <a href="#" (click)="eliminar()" class="btn btn-danger">
+                <i class="bi bi-trash"></i> Eliminar Clientes
+            </a>
+        </div>
+     </section>
+     <section id="details">
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Editar CLiente</h4>
+                </div>
+                <div class="card-body">
+                    <!-- Campo de nombre -->
+                     <div class="d-flex align-items-center mb-3">
+                        <label for="nombre" class="form-label" style="min-width: 100px">Nombre</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="nombre" name="nombre" class="form-control" required minlength="2" maxlength="50" [(ngModel)]="cliente.nombre" #nombre="ngModel"/>
+                            @if(nombre.invalid && nombre.touched){
+                                <div class="text-danger">* Nombre debe tener minimo 2 caracteres</div>
+                            }
+                        </div>
+                     </div>
+                     <!-- Campo de apellido -->
+                     <div class="d-flex align-items-center mb-3">
+                        <label for="apellido" class="form-label" style="min-width: 100px">Apellido</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="apellido" name="apellido" class="form-control" required minlength="2" maxlength="100" [(ngModel)]="cliente.apellido" #apellido="ngModel"/>
+                            @if(apellido.invalid && apellido.touched){
+                                <div class="text-danger">* Apellido debe tener minimo 2 caracteres</div>
+                            }
+                        </div>
+                     </div>
+                     <!-- Campo de email -->
+                     <div class="d-flex align-items-center mb-3">
+                        <label for="email" class="form-label" style="min-width: 100px">Email</label>
+                        <div class="col-sm-9">
+                            <input type="email" id="email" name="email" class="form-control" required maxlength="100" [(ngModel)]="cliente.email" #email="ngModel"/>
+                            @if(email.invalid && email.touched){
+                                <div class="text-danger">* Email invalido</div>
+                            }
+                        </div>
+                     </div>
+                     <!-- Campo de saldo -->
+                     <div class="d-flex align-items-center mb-3">
+                        <label for="saldo" class="form-label" style="min-width: 100px">Saldo</label>
+                        <div class="col-sm-9">
+                            <input type="number" id="saldo" name="saldo" class="form-control" required min="0.01" step="0.01" [(ngModel)]="cliente.saldo" #saldo="ngModel"/>
+                            @if(saldo.invalid && saldo.touched){
+                                <div class="text-danger">* Saldo invalido</div>
+                            }
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+     </section>
+</form>
