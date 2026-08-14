@@ -20,6 +20,14 @@ export class Login {
     private loginServicio: LoginService
   ){}
 
+  ngOnInit(){
+    this.loginServicio.getAuthState().subscribe(usuario => {
+      if(usuario){
+        this.router.navigate(['/']);
+      }
+    });
+  }
+
   login() {
     if(this.email && this.password){
       this.loginServicio.login(this.email, this.password)
