@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-no-encontrado',
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './no-encontrado.html',
   styleUrl: './no-encontrado.css',
 })
